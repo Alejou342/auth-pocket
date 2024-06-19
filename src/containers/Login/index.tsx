@@ -16,10 +16,10 @@ const Index = () => {
         <Loader active={loaderActive} />
         <SideHeader to="/" />
         <LoginSection  
-            label="Numero de Correo"
+            label="Correo electrónico"
             type="text"
             id="Correo"
-            placeholder="Numero de Correo"
+            placeholder="Correo electrónico"
             onChange={handleInputChange}
             value={formData.Correo}
         />

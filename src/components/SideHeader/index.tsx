@@ -9,7 +9,7 @@ const Index: React.FC<SideHeaderProps> = ({ to }) => {
         <Link href={to}>
             <Image src="/Pocki.svg" alt="pocki.svg" width={120} height={120} className='mx-auto w-[8rem]' priority={true} />
         </Link>
-        <p className='text-center text-xs text-primary font-bold'> CPocket </p>
+        <p className='text-center text-xs text-primary font-bold mt-2'> CPocket Payments </p>
     </div>
   )
 }
