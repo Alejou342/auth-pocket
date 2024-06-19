@@ -1,24 +1,52 @@
 "use client";
 import React from 'react';
-import { processStep, formatPrice } from '@/utils'
+import { formatPrice } from '@/utils'
 import SideHeader from '@/components/SideHeader'
 import { useRouter } from 'next/navigation';
 import ModalGeneral from '@/containers/Modal'
 import ModalContent from '@/components/ModalContent'
 import Loader from '@/components/Loader'
+import axios from 'axios'
 
-const CompraOnline = ({ actual, value }: any) => {
+const CompraOnline = () => {
+
+  interface BillingInfo {
+    numeroFactura: string,
+    referencia: string,
+    saldo: number,
+    paga: number,
+    producto: string
+  }
 
   const router = useRouter()
   const [ openModal, setOpenModal ] = React.useState(false)
   const [loaderActive, setLoaderActive] = React.useState<boolean>(false)
+  const [newBalance, setNewBalance] = React.useState<number>(0)
+  const [info, setInfo] = React.useState<BillingInfo>({
+    numeroFactura: "000000000000",
+    referencia: "000000000",
+    saldo: 353593479,
+    paga: 1230000,
+    producto: "0000-0000-000"
+  })
+
+  React.useEffect(() => {
+    try {
+      axios.get(`https://www.cpocketbot.com/api/getDataFactura`)
+      .then((res: any) => setInfo(res.data))
+      .catch((err: any) => console.error(err))
+    } catch (err) { 
+      console.error(err)
+    }
+  }, [])
 
   const doPayment = () => {
-      setLoaderActive(true)
-      setTimeout(() => {
-        setLoaderActive(false)
-        setOpenModal(!openModal)
+    setLoaderActive(true)
+    setTimeout(() => {
+      setLoaderActive(false)
+      setOpenModal(!openModal)
     }, 2000);
+    setNewBalance(info?.saldo - info?.paga)
   }
 
   return (
@@ -26,7 +54,7 @@ const CompraOnline = ({ actual, value }: any) => {
       <SideHeader to="/" />
       <Loader active={loaderActive} />
       <ModalGeneral state={openModal} setState={setOpenModal} >
-        <ModalContent />
+        <ModalContent total={newBalance} />
       </ModalGeneral>
       <main className="flex flex-col w-11/12">
         <div>
@@ -39,22 +67,18 @@ const CompraOnline = ({ actual, value }: any) => {
             <p>Nro. de factura:</p>
             <p>Descripcion del pago:</p>
             <p>Nro referencia:</p>
-            <p>Nro referencia 2:</p>
-            <p>Nro referencia 3:</p>
             <p>Saldo actual: </p>
             <p>Valor a pagar:</p>
             <p>Producto:</p>
           </div>
           <div className="ml-1">
-            <p>1345454657468484</p>
+            <p>{info?.numeroFactura}</p>
             <p>Pago Pocki</p>
-            <p>4165465163</p>
-            <p>192.168.54.11</p>
-            <p>121216</p>
-            <p className='text-green-400 font-bold'>{formatPrice(actual || 4500000)}</p>
-            <p className="text-red-400 font-bold" id="amount">{`- ${formatPrice(value || 350000)}`}</p>
+            <p>{info?.referencia || 958340984}</p>
+            <p className='text-green-400 font-bold'>{formatPrice(info?.saldo)}</p>
+            <p className="text-red-400 font-bold" id="amount">{`- ${formatPrice(info?.paga)}`}</p>
             <p className="font-bold truncate max-w-xs">
-              5616-1564165-14 Pocki Ahorros
+              {`555-342-123 Pocki Ahorros`}
             </p>
           </div>
         </div>
