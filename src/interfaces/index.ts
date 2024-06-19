@@ -456,7 +456,7 @@ export interface LoginApiResponse {
 }
 
 export interface FormData {
-    Correo: string
+    Celular: string
     Contraseña: string
 }
 

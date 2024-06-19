@@ -17,6 +17,7 @@ const Index: React.FC<any> = ({id, placeholder, label, onChange, value}) => {
                     id={id} 
                     placeholder={placeholder}
                     onChange={onChange}
+                    maxLength={4}
                     required
                 />
                 <Image 

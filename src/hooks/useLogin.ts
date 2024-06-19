@@ -11,7 +11,7 @@ const useLogin = () => {
     const [alert, setAlert] = React.useState<string>('')
 
     const [formData, setFormData] = React.useState<FormData>({
-        Correo: '',
+        Celular: '',
         Contraseña: '',
     }); 
 
@@ -23,9 +23,9 @@ const useLogin = () => {
         });
     };
 
-    const eventLogin = (response: AxiosResponse<LoginApiResponse>) => {
+    const eventLogin = () => {
         router.push('/resume')
-        Cookies.set('SessionInfo', JSON.stringify(response.data))
+        // Cookies.set('SessionInfo', JSON.stringify(response.data))
         setLoaderActive(false)
     }
 
@@ -40,9 +40,10 @@ const useLogin = () => {
         setAlert('')
         e.preventDefault()
         setLoaderActive(true)
-        axios.post(`https://www.cpocketbot.com/api/loginUser`, formData)
-        .then((response: any) => eventLogin(response))
-        .catch((error: any) => eventLoginFailed(error))
+        eventLogin()
+        // axios.post(`https://www.cpocketbot.com/api/loginUser`, formData)
+        // .then((response: any) => eventLogin(response))
+        // .catch((error: any) => eventLoginFailed(error))
     }
 
   return { loaderActive, alert, handleInputChange, onLoginSubmit, formData }
