@@ -8,7 +8,7 @@ const Index: React.FC<ModalGeneralProps> = ({ children, state, setState, classNa
     return (
         <>
             { state &&
-                <div className={`modal-general ${className}`}>
+                <div className={`modal-general bg-white ${className}`}>
                     <main className='relative modal shadow-lg bg-auxiliar p-6'>
                         <button 
                             className='close-modal-icon cursor-pointer'
