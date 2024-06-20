@@ -25,8 +25,8 @@ const CompraOnline = () => {
   const [info, setInfo] = React.useState<BillingInfo>({
     numeroFactura: "000000000000",
     referencia: "000000000",
-    saldo: 353593479,
-    paga: 1230000,
+    saldo: 0,
+    paga: 170000,
     producto: "0000-0000-000"
   })
 
@@ -46,7 +46,7 @@ const CompraOnline = () => {
       setLoaderActive(false)
       setOpenModal(!openModal)
     }, 2000);
-    setNewBalance(info?.saldo - info?.paga)
+    setNewBalance(info?.saldo - 170000)
   }
 
   return (
