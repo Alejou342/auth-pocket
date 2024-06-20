@@ -76,7 +76,7 @@ const CompraOnline = () => {
             <p>Pago Pocki</p>
             <p>{info?.referencia || 958340984}</p>
             <p className='text-green-400 font-bold'>{formatPrice(info?.saldo)}</p>
-            <p className="text-red-400 font-bold" id="amount">{`- ${formatPrice(info?.paga)}`}</p>
+            <p className="text-red-400 font-bold" id="amount">{`- ${formatPrice(170000)}`}</p>
             <p className="font-bold truncate max-w-xs">
               {`555-342-123 Pocki Ahorros`}
             </p>
